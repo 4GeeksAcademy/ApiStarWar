@@ -17,3 +17,19 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+
+class People(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+
+class Planet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    planet_id = db.Column(db.Integer, db.ForeignKey('planet.id'))
